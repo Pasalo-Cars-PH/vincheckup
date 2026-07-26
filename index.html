@@ -1,353 +1,838 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIN Checkup Pro | Check Vehicle History Before You Buy</title>
+    <meta name="description" content="Check accident history, title records, ownership history, theft reports, and more before buying a used vehicle. Get instant reports in 2 minutes.">
+    <meta property="og:title" content="VIN Checkup Pro | Check Vehicle History Before You Buy">
+    <meta property="og:description" content="Protect yourself from hidden vehicle problems. Check accident records, theft reports, and ownership history instantly.">
+    <meta property="og:image" content="https://pasalo-cars-ph.github.io/vincheckup/og-image.jpg">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="VIN Checkup Pro">
+    <meta name="twitter:description" content="Check vehicle history before you buy.">
+    <meta name="twitter:image" content="https://pasalo-cars-ph.github.io/vincheckup/og-image.jpg">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<title>VIN Checkup Pro | Check Vehicle History Before You Buy</title>
-<meta name="description" content="Check accident history, title records, ownership history, theft reports, and more before buying a used vehicle.">
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="VIN Checkup Pro | Check Vehicle History Before You Buy">
-<meta property="og:description" content="Protect yourself from hidden vehicle problems before you buy.">
-<meta property="og:image" content="https://pasalo-cars-ph.github.io/vincheckup/og-image.jpg">
-<meta property="og:url" content="https://pasalo-cars-ph.github.io/vincheckup/">
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="VIN Checkup Pro">
-<meta name="twitter:description" content="Check vehicle history before you buy.">
-<meta name="twitter:image" content="https://pasalo-cars-ph.github.io/vincheckup/og-image.jpg">
+        /* HEADER & NAV */
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-scroll-behavior:smooth;
-}
-body{
-background:#0b1220;
-color:#fff;
-line-height:1.6;
-}
-.container{
-max-width:1200px;
-margin:auto;
-padding:0 20px;
-}
-header{
-position:sticky;
-top:0;
-z-index:999;
-background:rgba(11,18,32,.95);
-backdrop-filter:blur(10px);
-border-bottom:1px solid rgba(255,255,255,.08);
-}
-nav{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:18px 0;
-}
-.logo{
-font-size:28px;
-font-weight:800;
-color:#22c55e;
-}
-.btn{
-background:#22c55e;
-color:#fff;
-padding:16px 28px;
-border-radius:12px;
-text-decoration:none;
-font-weight:700;
-display:inline-block;
-transition:.3s;
-}
-.btn:hover{
-transform:translateY(-3px);
-}
-.hero{
-padding:120px 0;
-text-align:center;
-background:
-linear-gradient(rgba(11,18,32,.75),rgba(11,18,32,.92)),
-url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1600&auto=format&fit=crop');
-background-size:cover;
-background-position:center;
-}
-.hero h1{
-font-size:58px;
-font-weight:800;
-margin-bottom:20px;
-}
-.hero span{
-color:#22c55e;
-}
-.hero p{
-max-width:800px;
-margin:auto;
-font-size:20px;
-opacity:.9;
-margin-bottom:35px;
-}
-.section{
-padding:90px 0;
-}
-.section-title{
-font-size:42px;
-text-align:center;
-margin-bottom:50px;
-}
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
-}
-.card{
-background:rgba(255,255,255,.05);
-border:1px solid rgba(255,255,255,.08);
-padding:25px;
-border-radius:20px;
-}
-.card h3{
-color:#22c55e;
-margin-bottom:10px;
-}
-.stats h2{
-font-size:42px;
-color:#22c55e;
-}
-.cta{
-padding:120px 0;
-text-align:center;
-background:linear-gradient(135deg,#22c55e,#15803d);
-}
-.cta h2{
-font-size:52px;
-margin-bottom:15px;
-}
-footer{
-padding:40px;
-text-align:center;
-background:#020617;
-}
-.floating-btn{
-position:fixed;
-bottom:20px;
-right:20px;
-background:#22c55e;
-color:white;
-padding:16px 24px;
-border-radius:50px;
-text-decoration:none;
-font-weight:700;
-z-index:999;
-box-shadow:0 10px 30px rgba(34,197,94,.4);
-}
-@media(max-width:768px){
-.hero h1{
-font-size:36px;
-}
-.cta h2{
-font-size:34px;
-}
-}
-</style>
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cta-button-header {
+            background: #ff6b35;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.3s;
+            font-size: 14px;
+        }
+
+        .cta-button-header:hover {
+            background: #e55a2b;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            background: #ff6b35;
+            color: white;
+            padding: 16px 40px;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+        }
+
+        .cta-button:hover {
+            background: #e55a2b;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.6);
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .urgency-badge {
+            background: rgba(255,107,53,0.2);
+            border: 2px solid #ff6b35;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 6px;
+            margin-top: 20px;
+            display: inline-block;
+            font-weight: 600;
+        }
+
+        /* TRUST SECTION */
+        .trust-section {
+            background: white;
+            padding: 40px 0;
+            border-top: 2px solid #e9ecef;
+        }
+
+        .trust-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .trust-item {
+            padding: 20px;
+        }
+
+        .trust-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .trust-item h3 {
+            color: #1e3c72;
+            margin-bottom: 8px;
+            font-size: 18px;
+        }
+
+        .trust-item p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* FEATURES SECTION */
+        .features {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 50px;
+            color: #1e3c72;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+
+        .feature-card {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .feature-card:hover {
+            border-color: #ff6b35;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .feature-card h3 {
+            color: #1e3c72;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        .feature-card p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* HOW IT WORKS */
+        .how-it-works {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .step {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 12px;
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 60px;
+            background: #ff6b35;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .step h3 {
+            color: #1e3c72;
+            margin: 30px 0 15px;
+            font-size: 20px;
+        }
+
+        .step p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* TESTIMONIALS */
+        .testimonials {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .testimonial {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 12px;
+            border-left: 4px solid #ff6b35;
+        }
+
+        .testimonial-stars {
+            color: #ffc107;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .testimonial-text {
+            color: #333;
+            margin-bottom: 20px;
+            font-style: italic;
+            line-height: 1.7;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .author-info h4 {
+            color: #1e3c72;
+            margin-bottom: 2px;
+            font-size: 14px;
+        }
+
+        .author-info p {
+            color: #666;
+            font-size: 12px;
+        }
+
+        /* FAQ */
+        .faq {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .faq-question {
+            padding: 20px;
+            background: white;
+            border: none;
+            width: 100%;
+            text-align: left;
+            font-size: 16px;
+            font-weight: 600;
+            color: #1e3c72;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s;
+        }
+
+        .faq-question:hover {
+            background: #f8f9fa;
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s;
+            color: #666;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 20px;
+        }
+
+        .faq-toggle {
+            font-size: 20px;
+            transition: transform 0.3s;
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(180deg);
+        }
+
+        /* CTA SECTION */
+        .cta-section {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #1a2a3a;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 15px;
+            color: #ff6b35;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 8px;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #ff6b35;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            color: #999;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .cta-section h2 {
+                font-size: 28px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .hero-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* ANIMATIONS */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .feature-card {
+            animation: slideIn 0.6s ease-out;
+        }
+    </style>
 </head>
-
 <body>
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">🚗 VIN Checkup Pro</div>
+                <a href="https://1a403ewhse3djzbrx8f3gzlpuk.hop.clickbank.net" class="cta-button-header">Check Now</a>
+            </div>
+        </div>
+    </header>
 
-<a class="floating-btn" href="https://1a403ewhse3djzbrx8f3gzlpuk.hop.clickbank.net" target="_blank">
-🚗 Check Now
-</a>
+    <!-- HERO -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Don't Buy a Used Car Without Checking Its History First</h1>
+                <p>Protect yourself from hidden accidents, title problems, and stolen vehicles. Get instant vehicle history reports in just 2 minutes.</p>
+                <a href="https://1a403ewhse3djzbrx8f3gzlpuk.hop.clickbank.net" class="cta-button">🚗 Check Vehicle History Now</a>
+                <div class="urgency-badge">⚡ 47 people checked vehicles today</div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-number">1M+</div>
+                        <div class="stat-label">VIN Searches</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">500K+</div>
+                        <div class="stat-label">Reports Generated</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">99%</div>
+                        <div class="stat-label">Satisfaction</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">2 Min</div>
+                        <div class="stat-label">Instant Reports</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<header>
-<div class="container">
-<nav>
-<div class="logo">VIN CHECKUP PRO</div>
-<a class="btn" href="https://1a403ewhse3djzbrx8f3gzlpuk.hop.clickbank.net" target="_blank">
-Check Vehicle History
-</a>
-</nav>
-</div>
-</header>
+    <!-- TRUST SIGNALS -->
+    <section class="trust-section">
+        <div class="container">
+            <div class="trust-items">
+                <div class="trust-item">
+                    <div class="trust-icon">✅</div>
+                    <h3>100% Legal & Safe</h3>
+                    <p>Uses publicly available data sources</p>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-icon">🔒</div>
+                    <h3>Secure & Private</h3>
+                    <p>SSL encrypted and GDPR compliant</p>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-icon">⚡</div>
+                    <h3>Instant Results</h3>
+                    <p>Most reports ready in 2 minutes</p>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-icon">🌍</div>
+                    <h3>Works Nationwide</h3>
+                    <p>Covers cars, trucks, motorcycles & RVs</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<section class="hero">
-<div class="container">
+    <!-- FEATURES -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">What You'll Discover About Any Vehicle</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🚗</div>
+                    <h3>Accident History</h3>
+                    <p>Review all reported accidents, damage records, and insurance claims on the vehicle's history.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📄</div>
+                    <h3>Title Records</h3>
+                    <p>Check ownership transfers, liens, liens status, and title-related information.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Mileage History</h3>
+                    <p>Review recorded mileage from inspections and service records to spot odometer fraud.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Theft Reports</h3>
+                    <p>Check if the vehicle has been reported stolen or recovered from theft.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h3>Ownership History</h3>
+                    <p>Review how many previous owners the vehicle has had and ownership timeline.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚙️</div>
+                    <h3>Vehicle Specs</h3>
+                    <p>Verify exact year, make, model, VIN, engine type, and other technical details.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<h1>Check Vehicle History Before You Buy Any <span>Used Vehicle</span></h1>
+    <!-- HOW IT WORKS -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How It Works - 4 Simple Steps</h2>
+            <div class="steps-grid">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Find the VIN</h3>
+                    <p>Locate the VIN on the vehicle dashboard or driver's door jamb. It's a 17-character code.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Enter & Check</h3>
+                    <p>Paste the VIN into our secure search tool. It takes less than 30 seconds.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Get Report</h3>
+                    <p>Receive your complete vehicle history report with all available records in 2 minutes.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Buy Confident</h3>
+                    <p>Make an informed decision knowing the vehicle's full history and potential red flags.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<p>
-Protect yourself from hidden vehicle problems. Access vehicle history information including accident records, title records, ownership history and theft reports before buying.
-</p>
+    <!-- TESTIMONIALS -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Buyers Are Saying</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <div class="testimonial-text">"Saved me ₱180,000! The report showed the car had a major accident that the seller didn't mention. Absolutely worth it."</div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JM</div>
+                        <div class="author-info">
+                            <h4>Juan Mercado</h4>
+                            <p>Manila, Buyer</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <div class="testimonial-text">"Found out the vehicle had an active lien on it. Dodged a bullet! The search was super fast and easy to use."</div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MC</div>
+                        <div class="author-info">
+                            <h4>Maria Cruz</h4>
+                            <p>Cavite, Buyer</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <div class="testimonial-text">"Great tool for negotiating price. The report proved the mileage was rolled back. Now I know exactly what I'm paying for."</div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">RC</div>
+                        <div class="author-info">
+                            <h4>Ramon Corpuz</h4>
+                            <p>Quezon City, Buyer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<a class="btn" href="https://1a403ewhse3djzbrx8f3gzlpuk.hop.clickbank.net" target="_blank" style="font-size:20px;padding:18px 40px;">
-🚗 Check Vehicle History Now
-</a>
+    <!-- FAQ -->
+    <section class="faq">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>What is a VIN and where do I find it?</span>
+                        <span class="faq-toggle">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        A Vehicle Identification Number (VIN) is a unique 17-character code assigned to every vehicle. You can find it on the driver's side dashboard (visible through the windshield), driver's door jamb, or inside the vehicle documentation.
+                    </div>
+                </div>
 
-<p style="margin-top:20px;opacity:.8;">
-Accident Records • Title History • Theft Reports • Ownership Records
-</p>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>How fast will I get my report?</span>
+                        <span class="faq-toggle">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        Most vehicle history reports are available instantly or within 2 minutes of submitting your VIN. You'll receive an email confirmation with a link to access your complete report.
+                    </div>
+                </div>
 
-</div>
-</section>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Can I check imported vehicles?</span>
+                        <span class="faq-toggle">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        Yes! Our database includes imported vehicles with valid VINs. The report will include whatever history is available for the vehicle based on the VIN.
+                    </div>
+                </div>
 
-<section class="section">
-<div class="container">
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>What types of vehicles are supported?</span>
+                        <span class="faq-toggle">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        We support cars, SUVs, trucks, motorcycles, vans, and RVs. Any vehicle with a valid VIN can be checked through our system.
+                    </div>
+                </div>
 
-<div class="grid">
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Is this legal and private?</span>
+                        <span class="faq-toggle">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        Yes. We use publicly available data sources and comply with all privacy regulations including GDPR. All your data is encrypted with SSL security.
+                    </div>
+                </div>
 
-<div class="card stats">
-<h2>1M+</h2>
-<p>VIN Searches</p>
-</div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>What if I'm not satisfied with my report?</span>
+                        <span class="faq-toggle">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        We stand behind our reports. If you're not satisfied, we offer a money-back guarantee within 30 days of purchase, no questions asked.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<div class="card stats">
-<h2>500K+</h2>
-<p>Reports Generated</p>
-</div>
+    <!-- FINAL CTA -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Protect Your Investment Today</h2>
+            <p>Don't let a bad vehicle purchase ruin your finances. Get a complete history report in just 2 minutes and make a confident decision.</p>
+            <a href="https://1a403ewhse3djzbrx8f3gzlpuk.hop.clickbank.net" class="cta-button">🚗 Check Vehicle History Now</a>
+        </div>
+    </section>
 
-<div class="card stats">
-<h2>99%</h2>
-<p>Customer Satisfaction</p>
-</div>
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>VIN Checkup Pro</h4>
+                    <p style="color: #999; font-size: 13px;">Helping buyers make informed vehicle purchasing decisions with instant vehicle history reports.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#features">What We Check</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 VIN Checkup Pro. All Rights Reserved. | SSL Secured | GDPR Compliant</p>
+            </div>
+        </div>
+    </footer>
 
-<div class="card stats">
-<h2>24/7</h2>
-<p>Instant Access</p>
-</div>
-
-</div>
-
-</div>
-</section>
-
-<section class="section">
-<div class="container">
-
-<h2 class="section-title">What You'll Discover</h2>
-
-<div class="grid">
-
-<div class="card">
-<h3>🚗 Accident History</h3>
-<p>Review reported accidents and damage records.</p>
-</div>
-
-<div class="card">
-<h3>📄 Title Records</h3>
-<p>Check title-related information.</p>
-</div>
-
-<div class="card">
-<h3>📊 Mileage Records</h3>
-<p>Review available mileage history.</p>
-</div>
-
-<div class="card">
-<h3>🔒 Theft Reports</h3>
-<p>Check reported theft information.</p>
-</div>
-
-<div class="card">
-<h3>👥 Ownership History</h3>
-<p>Review previous ownership records.</p>
-</div>
-
-<div class="card">
-<h3>⚙ Vehicle Specifications</h3>
-<p>Verify available vehicle details.</p>
-</div>
-
-</div>
-
-</div>
-</section>
-
-<section class="section">
-<div class="container">
-
-<h2 class="section-title">How It Works</h2>
-
-<div class="grid">
-
-<div class="card">
-<h3>1️⃣ Find the VIN</h3>
-<p>Locate the VIN on the vehicle.</p>
-</div>
-
-<div class="card">
-<h3>2️⃣ Run the Check</h3>
-<p>Access available vehicle history information.</p>
-</div>
-
-<div class="card">
-<h3>3️⃣ Review Results</h3>
-<p>Check records and history details.</p>
-</div>
-
-<div class="card">
-<h3>4️⃣ Buy with Confidence</h3>
-<p>Make a more informed purchasing decision.</p>
-</div>
-
-</div>
-
-</div>
-</section>
-
-<section class="section">
-<div class="container">
-
-<h2 class="section-title">Frequently Asked Questions</h2>
-
-<div class="card">
-<h3>What is a VIN?</h3>
-<p>A Vehicle Identification Number is a unique identifier assigned to a vehicle.</p>
-</div>
-
-<br>
-
-<div class="card">
-<h3>How long does it take?</h3>
-<p>Most reports are available within minutes.</p>
-</div>
-
-<br>
-
-<div class="card">
-<h3>Can I check trucks and motorcycles?</h3>
-<p>Yes. Cars, SUVs, trucks, motorcycles, vans and RVs may be supported.</p>
-</div>
-
-</div>
-</section>
-
-<section class="cta">
-<div class="container">
-
-<h2>Protect Your Investment Today</h2>
-
-<p style="font-size:20px;margin-bottom:30px;">
-Don't buy a used vehicle without checking its history first.
-</p>
-
-<a class="btn" href="https://1a403ewhse3djzbrx8f3gzlpuk.hop.clickbank.net" target="_blank">
-🚗 Check Vehicle History Now
-</a>
-
-</div>
-</section>
-
-<footer>
-<h3>VIN CHECKUP PRO</h3>
-<p>Helping buyers make informed vehicle purchasing decisions.</p>
-<p style="margin-top:10px;">© 2026 All Rights Reserved.</p>
-</footer>
-
+    <script>
+        function toggleFAQ(button) {
+            const item = button.closest('.faq-item');
+            item.classList.toggle('active');
+        }
+    </script>
 </body>
 </html>
